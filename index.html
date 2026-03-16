@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeveeTech — Commercial Real Estate Intelligence</title>
+<meta name="description" content="AI-powered property intelligence briefs for commercial real estate investors. Multi-stage analysis pipeline with human oversight.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0f3460;
+    --navy-light: rgba(15, 52, 96, 0.06);
+    --navy-mid: rgba(15, 52, 96, 0.72);
+    --navy-faint: rgba(15, 52, 96, 0.03);
+    --accent: #1a6dd4;
+    --green: #16a34a;
+    --amber: #d97706;
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --border: #e8e4de;
+    --text: #1a1816;
+    --muted: #6b6560;
+    --light: #9a9590;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250, 250, 249, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 22px;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--navy) !important;
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.88; }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 160px 40px 100px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--light);
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--navy);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--navy); background: var(--navy-light); }
+
+  /* ── Section shared ── */
+  section { padding: 100px 40px; }
+  .section-inner { max-width: 1080px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--light);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 36px;
+    color: var(--navy);
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .section-desc {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  /* ── Problem ── */
+  .problem { background: var(--navy); color: white; }
+  .problem .section-label { color: rgba(255,255,255,0.4); }
+  .problem .section-title { color: white; }
+  .problem .section-desc { color: rgba(255,255,255,0.65); }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+  }
+  .problem-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .problem-card .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .problem-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: white;
+  }
+  .problem-card p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  /* ── Services ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px;
+    transition: all 0.2s;
+  }
+  .service-card:hover {
+    border-color: var(--navy);
+    box-shadow: 0 4px 24px rgba(15, 52, 96, 0.06);
+  }
+  .service-card .icon {
+    width: 48px; height: 48px;
+    background: var(--navy-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .service-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--navy);
+  }
+  .service-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .service-card .includes {
+    list-style: none;
+    padding: 0;
+  }
+  .service-card .includes li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+  .service-card .includes li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* ── Process ── */
+  .process { background: var(--navy-faint); }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0;
+    position: relative;
+  }
+  .process-step {
+    padding: 32px;
+    position: relative;
+  }
+  .process-step .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--navy);
+    opacity: 0.1;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .process-step h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .process-step p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .process-step .model-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--light);
+    background: var(--navy-light);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 12px;
+    font-weight: 600;
+  }
+
+  /* ── Pricing ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 960px;
+  }
+  .price-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+  }
+  .price-card.featured {
+    border-color: var(--navy);
+    box-shadow: 0 4px 24px rgba(15, 52, 96, 0.08);
+    position: relative;
+  }
+  .price-card.featured::before {
+    content: "Most Popular";
+    position: absolute;
+    top: -12px;
+    left: 36px;
+    background: var(--navy);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+  .price-card .tier {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--light);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .price-card .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-card .price-note {
+    font-size: 13px;
+    color: var(--light);
+    margin-bottom: 24px;
+  }
+  .price-card .price-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+  .price-card .features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 28px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+  .price-card .features li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 6px 0;
+    padding-left: 24px;
+    position: relative;
+  }
+  .price-card .features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .price-card .price-cta {
+    display: block;
+    text-align: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .price-card .price-cta.primary {
+    background: var(--navy);
+    color: white;
+  }
+  .price-card .price-cta.primary:hover { opacity: 0.88; }
+  .price-card .price-cta.secondary {
+    border: 1px solid var(--border);
+    color: var(--navy);
+  }
+  .price-card .price-cta.secondary:hover { border-color: var(--navy); background: var(--navy-light); }
+
+  /* ── Differentiator ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .diff-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 28px;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .diff-content p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .diff-visual {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .diff-compare {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .diff-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    font-size: 13px;
+  }
+  .diff-row .label {
+    color: var(--light);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .diff-row .them {
+    color: var(--muted);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .diff-row .us {
+    color: var(--navy);
+    font-weight: 500;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--navy);
+    text-align: center;
+    padding: 80px 40px;
+  }
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 40px;
+    color: white;
+    margin-bottom: 16px;
+  }
+  .cta-section p {
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  .cta-section .btn-primary {
+    background: white;
+    color: var(--navy);
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--light);
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--navy); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding: 64px 20px; }
+    .hero { padding: 120px 20px 64px; }
+    .hero h1 { font-size: 36px; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .process-steps { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-brand">LeveeTech</a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact" class="nav-cta">Get a Brief</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-label">Commercial Real Estate Intelligence</div>
+  <h1>Property intelligence briefs that close deals</h1>
+  <p>Multi-stage AI analysis with human quality gates. Market research, comparable scoring, risk assessment, and investment memos — delivered in 48 hours, not 3 weeks.</p>
+  <div class="hero-actions">
+    <a href="#pricing" class="btn-primary">See Pricing</a>
+    <a href="#process" class="btn-secondary">How It Works</a>
+  </div>
+</div>
+
+<!-- Problem -->
+<section class="problem">
+  <div class="section-inner">
+    <div class="section-label">The Problem</div>
+    <div class="section-title">CRE due diligence is broken</div>
+    <div class="section-desc">Investors spend weeks gathering data that should take hours. Analysts copy-paste from the same databases everyone else uses. The insights that win deals get buried in the noise.</div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="num">01</div>
+        <h3>Research takes too long</h3>
+        <p>Comparable analysis, market research, ownership verification — spread across a dozen sources, assembled manually. By the time you have the picture, someone else has the deal.</p>
+      </div>
+      <div class="problem-card">
+        <div class="num">02</div>
+        <h3>Generic tools, generic output</h3>
+        <p>Platforms like Reonomy and CoStar give everyone the same data. There's no edge in commodity information. The value is in the analysis layer — and that's still manual.</p>
+      </div>
+      <div class="problem-card">
+        <div class="num">03</div>
+        <h3>No quality gate</h3>
+        <p>AI tools that promise instant analysis ship hallucinated data to your inbox. One fabricated comp in a client memo destroys credibility. Speed without accuracy is worse than slow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">Intelligence, not just data</div>
+    <div class="section-desc">Every deliverable passes through a multi-agent analysis pipeline with human oversight. We don't ship first drafts.</div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">📊</div>
+        <h3>Property Intelligence Brief</h3>
+        <p>Complete investment analysis for a specific property or deal. Market context, scored comparables, risk assessment, and an actionable investment memo.</p>
+        <ul class="includes">
+          <li>Market research &amp; comparable identification</li>
+          <li>Scored property analysis (custom criteria)</li>
+          <li>Interactive dashboard with mapping</li>
+          <li>Investment memo with risk matrix</li>
+          <li>Opportunity assessment (BANT framework)</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="icon">🔍</div>
+        <h3>Market Scan</h3>
+        <p>Rapid due diligence on a market or thesis. Perfect for validating an investment strategy before committing resources.</p>
+        <ul class="includes">
+          <li>Market landscape analysis</li>
+          <li>Comparable property identification</li>
+          <li>Competitive activity assessment</li>
+          <li>Key risk flagging</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="icon">📈</div>
+        <h3>Portfolio Monitoring</h3>
+        <p>Ongoing intelligence on your active deals and markets. Monthly reports with new comparables, ownership changes, and market shifts.</p>
+        <ul class="includes">
+          <li>Monthly market intelligence reports</li>
+          <li>New comparable alerts</li>
+          <li>Ownership &amp; transaction monitoring</li>
+          <li>Custom dashboard updates</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section id="process" class="process">
+  <div class="section-inner">
+    <div class="section-label">How It Works</div>
+    <div class="section-title">Six stages. Multiple reviewers. Zero hallucinations.</div>
+    <div class="section-desc">Every brief runs through a purpose-built analysis pipeline. Each stage uses a different AI model optimized for that specific task, with quality gates between stages.</div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <h3>Research &amp; Discovery</h3>
+        <p>Market landscape, comparable properties, ownership records, transaction history, zoning — assembled from multiple sources and cross-referenced.</p>
+        <span class="model-tag">Deep Research</span>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <h3>Analysis &amp; Scoring</h3>
+        <p>Properties scored against your investment criteria. Custom weighting by deal type — land, existing improvements, development sites.</p>
+        <span class="model-tag">Quantitative</span>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <h3>Quality Assurance</h3>
+        <p>Independent review of all claims, scores, and citations. Fabricated data caught here — not in your client meeting. If QA fails, the brief goes back to Stage 2.</p>
+        <span class="model-tag">Independent QA</span>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <h3>Investment Memo</h3>
+        <p>Opportunity assessment, risk matrix, open items, and a clear recommendation. Written for decision-makers, not analysts.</p>
+        <span class="model-tag">Strategic</span>
+      </div>
+      <div class="process-step">
+        <div class="step-num">05</div>
+        <h3>Consistency Gate</h3>
+        <p>Final cross-check: every number matches across all documents. Every claim is sourced. Every recommendation is supported by the evidence.</p>
+        <span class="model-tag">Final Review</span>
+      </div>
+      <div class="process-step">
+        <div class="step-num">06</div>
+        <h3>Delivery</h3>
+        <p>Interactive dashboard, scored comparable database, investment memo, and risk assessment — packaged and delivered within your timeline.</p>
+        <span class="model-tag">Deliverables</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Differentiator -->
+<section id="why">
+  <div class="section-inner">
+    <div class="section-label">Why LeveeTech</div>
+    <div class="diff-grid">
+      <div class="diff-content">
+        <h3>Multi-agent review catches what single-AI tools miss</h3>
+        <p>Most AI-powered CRE tools run your query through one model and ship whatever comes back. That's how fabricated data ends up in client memos.</p>
+        <p>Our pipeline uses different specialized models for research, analysis, and review — the same way a firm uses different people for diligence, underwriting, and legal review. No single model reviews its own work.</p>
+        <p>The result: briefs you can actually put in front of clients, investors, and partners.</p>
+      </div>
+      <div class="diff-visual">
+        <div class="diff-compare">
+          <div class="diff-row">
+            <span class="label">Typical AI Tool</span>
+            <span class="label">LeveeTech</span>
+          </div>
+          <div class="diff-row">
+            <span class="them">Single model, single pass</span>
+            <span class="us">6-stage multi-model pipeline</span>
+          </div>
+          <div class="diff-row">
+            <span class="them">No quality review</span>
+            <span class="us">Independent QA + consistency gate</span>
+          </div>
+          <div class="diff-row">
+            <span class="them">Generic scoring</span>
+            <span class="us">Custom criteria per deal type</span>
+          </div>
+          <div class="diff-row">
+            <span class="them">Raw data dump</span>
+            <span class="us">Interactive dashboard + memo</span>
+          </div>
+          <div class="diff-row">
+            <span class="them">Hallucination risk</span>
+            <span class="us">Correction loop catches errors</span>
+          </div>
+          <div class="diff-row">
+            <span class="them">Cookie-cutter output</span>
+            <span class="us">Branded to your firm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Pricing</div>
+    <div class="section-title">Straightforward pricing. No subscriptions required.</div>
+    <div class="section-desc">Pay per brief, or save with a monthly retainer. Every tier includes the full pipeline — the difference is scope and turnaround.</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="tier">Market Scan</div>
+        <div class="price">$250</div>
+        <div class="price-note">per report</div>
+        <div class="price-desc">Quick-turn market validation. Verify a thesis, screen a geography, or assess a deal's surface-level viability.</div>
+        <ul class="features">
+          <li>Market landscape analysis</li>
+          <li>5-10 scored comparables</li>
+          <li>Key risk flags</li>
+          <li>3-5 business day delivery</li>
+        </ul>
+        <a href="mailto:henry@levee.tech?subject=Market%20Scan%20Inquiry" class="price-cta secondary">Get Started</a>
+      </div>
+      <div class="price-card featured">
+        <div class="tier">Intelligence Brief</div>
+        <div class="price">$750</div>
+        <div class="price-note">per property</div>
+        <div class="price-desc">Complete property intelligence package. The full 6-stage pipeline with interactive dashboard and investment memo.</div>
+        <ul class="features">
+          <li>Full 6-stage analysis pipeline</li>
+          <li>15-25 scored comparables</li>
+          <li>Interactive map dashboard</li>
+          <li>Investment memo + risk matrix</li>
+          <li>BANT opportunity assessment</li>
+          <li>48-hour turnaround</li>
+        </ul>
+        <a href="mailto:henry@levee.tech?subject=Intelligence%20Brief%20Inquiry" class="price-cta primary">Get a Brief</a>
+      </div>
+      <div class="price-card">
+        <div class="tier">Retainer</div>
+        <div class="price">$1,500</div>
+        <div class="price-note">per month</div>
+        <div class="price-desc">For active dealmakers. Monthly allocation of briefs plus portfolio monitoring and priority turnaround.</div>
+        <ul class="features">
+          <li>2 Intelligence Briefs per month</li>
+          <li>Unlimited Market Scans</li>
+          <li>Portfolio monitoring dashboard</li>
+          <li>Monthly market intelligence report</li>
+          <li>24-hour priority turnaround</li>
+          <li>Custom scoring criteria</li>
+        </ul>
+        <a href="mailto:henry@levee.tech?subject=Retainer%20Inquiry" class="price-cta secondary">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Ready to close faster?</h2>
+  <p>Send us a property address. We'll show you what our pipeline finds.</p>
+  <a href="mailto:henry@levee.tech?subject=LeveeTech%20Inquiry" class="btn-primary">Get Your First Brief</a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 LeveeTech LLC. All rights reserved.</p>
+  <p style="margin-top: 8px;">
+    <a href="mailto:henry@levee.tech">henry@levee.tech</a>
+  </p>
+</footer>
+
+</body>
+</html>
