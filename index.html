@@ -297,6 +297,141 @@
     font-weight: 600;
   }
 
+  /* ── Case Study ── */
+  .case-study { background: var(--navy-faint); border-top: 1px solid var(--border); }
+  .case-study-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .case-study-header {
+    background: var(--navy);
+    padding: 32px 40px;
+    color: white;
+  }
+  .case-study-header .cs-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .case-study-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+  .case-study-header .cs-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+  .case-study-body {
+    padding: 40px;
+  }
+  .cs-rating {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .cs-rating .score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .cs-rating .score-label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .cs-rating .score-label strong {
+    display: block;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .cs-findings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .cs-finding {
+    padding: 20px;
+    background: var(--navy-faint);
+    border-radius: 8px;
+  }
+  .cs-finding .finding-icon {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .cs-finding h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .cs-finding p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .cs-quote {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 24px 28px;
+    color: white;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 300;
+    position: relative;
+  }
+  .cs-quote::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+  }
+  .cs-quote .attribution {
+    font-style: normal;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 12px;
+    font-weight: 500;
+  }
+  .cs-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .cs-meta-item {
+    font-size: 12px;
+    color: var(--light);
+  }
+  .cs-meta-item strong {
+    display: block;
+    font-size: 16px;
+    color: var(--navy);
+    font-weight: 600;
+  }
+
   /* ── Pricing ── */
   .pricing-grid {
     display: grid;
@@ -459,6 +594,142 @@
     border-bottom: 1px solid var(--border);
   }
 
+  /* ── Contact Form ── */
+  .contact-section { background: var(--bg); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    max-width: 960px;
+    align-items: start;
+  }
+  .contact-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 28px;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .contact-info p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-detail .cd-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--navy-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .contact-detail .cd-text {
+    font-size: 14px;
+    color: var(--text);
+  }
+  .contact-detail .cd-text a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .contact-detail .cd-text a:hover { text-decoration: underline; }
+  .contact-detail .cd-text .cd-label {
+    font-size: 11px;
+    color: var(--light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .contact-form {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px;
+  }
+  .contact-form h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--navy);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .form-submit {
+    width: 100%;
+    margin-top: 8px;
+  }
+  .form-note {
+    font-size: 12px;
+    color: var(--light);
+    text-align: center;
+    margin-top: 12px;
+  }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 32px;
+  }
+  .form-success .check {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+  .form-success h4 {
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .form-success p {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
   /* ── CTA ── */
   .cta-section {
     background: var(--navy);
@@ -504,10 +775,13 @@
     .hero h1 { font-size: 36px; }
     .diff-grid { grid-template-columns: 1fr; }
     .process-steps { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .cs-findings { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
     .process-steps { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -519,6 +793,7 @@
   <div class="nav-links">
     <a href="#services">Services</a>
     <a href="#process">Process</a>
+    <a href="#case-study">Results</a>
     <a href="#pricing">Pricing</a>
     <a href="#contact" class="nav-cta">Get a Brief</a>
   </div>
@@ -530,8 +805,8 @@
   <h1>Property intelligence briefs that close deals</h1>
   <p>Multi-stage AI analysis with human quality gates. Market research, comparable scoring, risk assessment, and investment memos — delivered in 48 hours, not 3 weeks.</p>
   <div class="hero-actions">
-    <a href="#pricing" class="btn-primary">See Pricing</a>
-    <a href="#process" class="btn-secondary">How It Works</a>
+    <a href="#contact" class="btn-primary">Get Your First Brief</a>
+    <a href="#case-study" class="btn-secondary">See a Sample</a>
   </div>
 </div>
 
@@ -653,6 +928,79 @@
   </div>
 </section>
 
+<!-- Case Study -->
+<section id="case-study" class="case-study">
+  <div class="section-inner">
+    <div class="section-label">Sample Analysis</div>
+    <div class="section-title">SC Data Center Corridor — NNN Flex Asset</div>
+    <div class="section-desc">A real brief produced by our pipeline. Investment analysis for a flex/industrial property adjacent to an active hyperscale data center campus in the Southeast.</div>
+
+    <div class="case-study-card">
+      <div class="case-study-header">
+        <div class="cs-label">Intelligence Brief</div>
+        <h3>NNN Flex Property — Data Center Corridor, SC</h3>
+        <div class="cs-subtitle">Hyperscale infrastructure adjacency play · Industrial/Flex</div>
+      </div>
+      <div class="case-study-body">
+        <div class="cs-rating">
+          <div class="score">7<span style="font-size:32px;color:var(--light)">/10</span></div>
+          <div class="score-label">
+            <strong>Opportunity Rating</strong>
+            Strong infrastructure thesis, deducted for tenant concentration risk and flex re-tenanting complexity in a secondary market.
+          </div>
+        </div>
+
+        <div class="cs-findings">
+          <div class="cs-finding">
+            <div class="finding-icon">📈</div>
+            <h4>Bull Case</h4>
+            <p>$12.3B+ in announced hyperscale capex creates structural demand through 2027+. Certified industrial park with limited supply offers build-to-suit optionality at $40-60K/acre.</p>
+          </div>
+          <div class="cs-finding">
+            <div class="finding-icon">⚠️</div>
+            <h4>Key Risk Uncovered</h4>
+            <p>Multiple announcements may overlap — true incremental investment could be lower than headline numbers suggest, shortening the construction demand runway.</p>
+          </div>
+          <div class="cs-finding">
+            <div class="finding-icon">🎯</div>
+            <h4>Recommendation</h4>
+            <p>Buy at 7%+ cap rate, plan for a 3-year hold with re-tenanting at market. Skip if 10-year stability is required — this is opportunistic infrastructure-adjacent flex.</p>
+          </div>
+          <div class="cs-finding">
+            <div class="finding-icon">🔬</div>
+            <h4>Hidden Factor</h4>
+            <p>Former biotech lab may require specialized tenanting or environmental remediation, narrowing the buyer pool beyond standard flex — not visible in typical market data.</p>
+          </div>
+        </div>
+
+        <div class="cs-quote">
+          This is a bet on hyperscale AI infrastructure build-out continuing through 2027+. The NNN lease provides clean cash flow during the hold. At the right price, it's a solid opportunistic play for an investor who can manage turnover.
+          <div class="attribution">— From the Investment Assessment</div>
+        </div>
+
+        <div class="cs-meta">
+          <div class="cs-meta-item">
+            <strong>6</strong>
+            Pipeline stages
+          </div>
+          <div class="cs-meta-item">
+            <strong>3</strong>
+            Independent reviewers
+          </div>
+          <div class="cs-meta-item">
+            <strong>48hr</strong>
+            Turnaround
+          </div>
+          <div class="cs-meta-item">
+            <strong>15+</strong>
+            Scored comparables
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Differentiator -->
 <section id="why">
   <div class="section-inner">
@@ -718,7 +1066,7 @@
           <li>Key risk flags</li>
           <li>3-5 business day delivery</li>
         </ul>
-        <a href="mailto:henry@levee.tech?subject=Market%20Scan%20Inquiry" class="price-cta secondary">Get Started</a>
+        <a href="#contact" class="price-cta secondary">Get Started</a>
       </div>
       <div class="price-card featured">
         <div class="tier">Intelligence Brief</div>
@@ -733,7 +1081,7 @@
           <li>BANT opportunity assessment</li>
           <li>48-hour turnaround</li>
         </ul>
-        <a href="mailto:henry@levee.tech?subject=Intelligence%20Brief%20Inquiry" class="price-cta primary">Get a Brief</a>
+        <a href="#contact" class="price-cta primary">Get a Brief</a>
       </div>
       <div class="price-card">
         <div class="tier">Retainer</div>
@@ -748,26 +1096,152 @@
           <li>24-hour priority turnaround</li>
           <li>Custom scoring criteria</li>
         </ul>
-        <a href="mailto:henry@levee.tech?subject=Retainer%20Inquiry" class="price-cta secondary">Contact Us</a>
+        <a href="#contact" class="price-cta secondary">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact-section">
+  <div class="section-inner">
+    <div class="section-label">Get Started</div>
+    <div class="section-title">Send us a property. See what we find.</div>
+    <div class="section-desc">Fill out the form below and we'll get back to you within 24 hours with a scope and timeline for your analysis.</div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Let's talk about your deal</h3>
+        <p>Whether you have a specific property to analyze or want to explore a market thesis, we'll tailor the scope to what you actually need. No commitments — just send us the details.</p>
+
+        <div class="contact-detail">
+          <div class="cd-icon">📧</div>
+          <div class="cd-text">
+            <div class="cd-label">Email</div>
+            <a href="mailto:hhlawler@gmail.com?subject=LeveeTech%20Brief%20Inquiry">hhlawler@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">⚡</div>
+          <div class="cd-text">
+            <div class="cd-label">Response Time</div>
+            Within 24 hours
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">🔒</div>
+          <div class="cd-text">
+            <div class="cd-label">Confidentiality</div>
+            All deal details stay confidential. Always.
+          </div>
+        </div>
+
+        <p style="margin-top: 24px; font-size: 13px; color: var(--light);">
+          <strong style="color: var(--muted);">First brief is complimentary</strong> for qualified investors — we'd rather show you the quality than sell you on it.
+        </p>
+      </div>
+
+      <div class="contact-form" id="contactForm">
+        <h4>Request an Analysis</h4>
+        <form id="briefForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required placeholder="Jane Smith">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="jane@company.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="company">Company / Fund</label>
+            <input type="text" id="company" name="company" placeholder="Acme Capital Partners">
+          </div>
+          <div class="form-group">
+            <label for="service">Service</label>
+            <select id="service" name="service">
+              <option value="intelligence-brief">Intelligence Brief ($750)</option>
+              <option value="market-scan">Market Scan ($250)</option>
+              <option value="retainer">Monthly Retainer ($1,500)</option>
+              <option value="not-sure">Not sure yet — let's talk</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="property">Property Address or Market</label>
+            <input type="text" id="property" name="property" required placeholder="1234 Main St, Charlotte NC or 'multifamily SE corridor'">
+          </div>
+          <div class="form-group">
+            <label for="details">Additional Context</label>
+            <textarea id="details" name="details" placeholder="Deal type, investment thesis, specific questions, timeline..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Submit Request</button>
+          <div class="form-note">We'll respond within 24 hours with a scope and estimate.</div>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="check">✓</div>
+          <h4>Request submitted</h4>
+          <p>We've received your analysis request and will respond within 24 hours. Check your email for confirmation.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section" id="contact">
+<section class="cta-section">
   <h2>Ready to close faster?</h2>
   <p>Send us a property address. We'll show you what our pipeline finds.</p>
-  <a href="mailto:henry@levee.tech?subject=LeveeTech%20Inquiry" class="btn-primary">Get Your First Brief</a>
+  <a href="#contact" class="btn-primary">Get Your First Brief</a>
 </section>
 
 <!-- Footer -->
 <footer>
   <p>&copy; 2026 LeveeTech LLC. All rights reserved.</p>
   <p style="margin-top: 8px;">
-    <a href="mailto:henry@levee.tech">henry@levee.tech</a>
+    <a href="mailto:hhlawler@gmail.com">hhlawler@gmail.com</a> · Charlotte, NC
   </p>
 </footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+
+  // Build email body from form data
+  const name = data.get('name');
+  const email = data.get('email');
+  const company = data.get('company') || 'Not specified';
+  const service = data.get('service');
+  const property = data.get('property');
+  const details = data.get('details') || 'None';
+
+  const serviceLabels = {
+    'intelligence-brief': 'Intelligence Brief ($750)',
+    'market-scan': 'Market Scan ($250)',
+    'retainer': 'Monthly Retainer ($1,500)',
+    'not-sure': 'Not sure yet'
+  };
+
+  const subject = encodeURIComponent(`Brief Request: ${property}`);
+  const body = encodeURIComponent(
+    `New brief request from LeveeTech website\n\n` +
+    `Name: ${name}\n` +
+    `Email: ${email}\n` +
+    `Company: ${company}\n` +
+    `Service: ${serviceLabels[service] || service}\n` +
+    `Property/Market: ${property}\n` +
+    `Details: ${details}\n`
+  );
+
+  // Open email client with pre-filled data
+  window.location.href = `mailto:hhlawler@gmail.com?subject=${subject}&body=${body}`;
+
+  // Show success state
+  form.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+</script>
 
 </body>
 </html>
